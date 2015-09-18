@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="CourseRank" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Emneranking</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+    </head>
+    <body ng-controller="CourseController as cCtrl">
+    <div class="container">
+      <label for="search">Search table:</label>
+      <input name="search" ng-model="cCtrl.search" type="text" class="form-control smaller">
+      <label for="bachelor">Include bachelor courses: </label>
+      <input name="bachelor" type="checkbox" ng-model="cCtrl.bachelor">
+      <label for="master">Include master courses: </label>
+      <input name="master" type="checkbox" ng-model="cCtrl.master">
+      <table class="table table-striped">
+        <th ng-click="cCtrl.resort(0)">Course</th>
+        <th ng-click="cCtrl.resort(1)">Score(1-100)</th>
+        <tr ng-repeat="course in cCtrl.courses | filter:cCtrl.search | isBachelorOrMaster:cCtrl.bachelor:cCtrl.master | orderBy:cCtrl.sortBy:cCtrl.direction">
+        <td>{{course.course}}</td>
+        <td>{{course.score}}</td>
+        </tr>
+      </table>
+    </div>
+    <script type="text/javascript" src="./js/vendor/angular.min.js"></script>
+    <script type="text/javascript" src="./js/vendor/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="./courses/main.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54548238-2', 'auto');
+  ga('send', 'pageview');
+
+    </script>
+    </body>
+</html>
